@@ -1,7 +1,7 @@
 import type { NextPageWithLayout } from "./_app";
 
 const Page: NextPageWithLayout = () => {
-  return <p className={"font-bold"}>hello world</p>;
+  return <main>main</main>;
 };
 
 export default Page;
