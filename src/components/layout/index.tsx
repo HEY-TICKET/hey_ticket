@@ -12,7 +12,8 @@ const Layout = ({ children }: LayoutProps) => {
     <div className={"grid grid-cols-6 grid-rows-[8em_auto] h-full"}>
       <Header />
       <aside className={"col-span-1"}>aside</aside>
-      <section className={"border-l col-span-5"}>{children}</section>
+      <section className={"border-l col-span-4 border-r"}>{children}</section>
+      <aside className={"col-span-1"}>aside2</aside>
     </div>
   );
 };
@@ -27,6 +28,7 @@ const Header = () => {
   const NavList: NavListTypes[] = [
     { title: "콘서트", href: "/concert" },
     { title: "뮤지컬", href: "/musical" },
+    { title: "티켓 오픈공지", href: "/open/page" },
   ];
 
   const router = useRouter();
@@ -54,7 +56,7 @@ const Header = () => {
         <nav className={"h-8 border-t px-8"}>
           <ul className={"flex items-center h-full"}>
             {NavList.map((list) => (
-              <li>
+              <li key={list.href}>
                 <Link
                   href={list.href}
                   className={`font-bold ${
