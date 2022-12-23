@@ -18,7 +18,7 @@ const CategoryList = ({ list, value, onChange }: CategoryListProps) => {
         const isNotLast = index + 1 !== list.length;
         const isCurrentValue = item.value === value.value;
         return (
-          <>
+          <React.Fragment key={index}>
             <button
               className={`text-[14px] ${
                 isCurrentValue
@@ -34,7 +34,7 @@ const CategoryList = ({ list, value, onChange }: CategoryListProps) => {
             ) : (
               <></>
             )}
-          </>
+          </React.Fragment>
         );
       })}
     </section>

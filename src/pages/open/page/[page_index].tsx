@@ -10,6 +10,7 @@ import OpenNoticeListItem, {
 import CategoryList, {
   OptionItemProps,
 } from "../../../components/CategoryList";
+import OpenNoticeListItemSkeleton from "../../../components/OpenNoticeListItemSkeleton";
 
 interface NoticeProps {}
 
@@ -90,7 +91,7 @@ const OpenNotice = ({
         </div>
         <ul>
           <li>
-            {OpenNoticeList.map((item) => (
+            {OpenNoticeList?.map((item) => (
               <OpenNoticeListItem key={item.id} {...item} />
             ))}
           </li>

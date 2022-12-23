@@ -55,7 +55,14 @@ const OpenNoticeListItem = ({
         {posterUrl ? (
           <img src={posterUrl} alt="poster" />
         ) : (
-          <div className={"w-[65px] h-full bg-gray-200 m-auto"}></div>
+          <div
+            className={
+              "w-[65px] h-full bg-gray-100 text-gray-300 flex flex-col justify-center items-center m-auto text-xs font-bold"
+            }
+          >
+            <span>OPEN</span>
+            <span>TICKET</span>
+          </div>
         )}
       </section>
     </div>
