@@ -7,23 +7,29 @@ export type OptionItemProps = {
 
 interface CategoryListProps {
   list: OptionItemProps[];
-  value: OptionItemProps;
+  value?: OptionItemProps;
   onChange: (value: OptionItemProps) => void;
+  className?: string;
 }
 
-const CategoryList = ({ list, value, onChange }: CategoryListProps) => {
+const CategoryList = ({
+  list,
+  value,
+  onChange,
+  className,
+}: CategoryListProps) => {
   return (
-    <section className={"flex gap-2"}>
+    <section className={`flex gap-2 ${className}`}>
       {list.map((item, index) => {
         const isNotLast = index + 1 !== list.length;
-        const isCurrentValue = item.value === value.value;
+        const isCurrentValue = item.value === value?.value;
         return (
           <React.Fragment key={index}>
             <button
               className={`text-[14px] ${
                 isCurrentValue
-                  ? "text-orange-400 font-bold"
-                  : "hover:text-orange-400"
+                  ? "text-jin-blue-400 font-bold"
+                  : "hover:text-jin-blue-400"
               }`}
               onClick={() => onChange(item)}
             >

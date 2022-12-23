@@ -51,9 +51,13 @@ const SearchForm = ({
 }: SearchFormProps) => {
   const [value, setValue] = useState<string>("");
 
+  const [isFocused, setIsFocused] = useState(false);
+
   return (
     <form
-      className={`flex items-center rounded-2xl border w-1/2 min-w-[300px] mx-2 px-6 py-1.5 ${className?.form}`}
+      className={`flex items-center rounded-2xl border w-1/2 min-w-[300px] mx-2 px-6 py-1.5 ${
+        isFocused ? "border-jin-blue-400" : ""
+      } ${className?.form}`}
       onSubmit={(e) => {
         e.preventDefault();
         onSubmit(value);
@@ -66,8 +70,10 @@ const SearchForm = ({
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           setValue(e.target.value)
         }
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
       />
-      <button className={"text-orange-400"}>
+      <button className={"text-jin-blue-400"}>
         {iconSize === "md" ? MagnifyingGlass : MiniMagnifyingGlass}
       </button>
     </form>

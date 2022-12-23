@@ -12,6 +12,36 @@ interface SelectProps {
   placeholder?: string;
 }
 
+const ChevronDown = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 20 20"
+    fill="currentColor"
+    className="w-5 h-5"
+  >
+    <path
+      fillRule="evenodd"
+      d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+      clipRule="evenodd"
+    />
+  </svg>
+);
+
+const ChevronUp = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 20 20"
+    fill="currentColor"
+    className="w-5 h-5"
+  >
+    <path
+      fillRule="evenodd"
+      d="M14.77 12.79a.75.75 0 01-1.06-.02L10 8.832 6.29 12.77a.75.75 0 11-1.08-1.04l4.25-4.5a.75.75 0 011.08 0l4.25 4.5a.75.75 0 01-.02 1.06z"
+      clipRule="evenodd"
+    />
+  </svg>
+);
+
 const Select = ({
   options,
   value = null,
@@ -44,16 +74,22 @@ const Select = ({
   return (
     <div ref={ref} className={"relative text-sm"}>
       <div
-        className={`w-full h-8 rounded cursor-pointer transition duration-100 ease-linear ${
+        className={`flex justify-between w-full h-8 rounded cursor-pointer transition duration-100 ease-linear ${
           showOption
-            ? "outline outline-2 outline-orange-200 border border-orange-400 "
+            ? "outline outline-2 outline-jin-blue-200 border border-jin-blue-400 "
             : "border hover:border-gray-400"
         }`}
         onClick={() => setShowOption(!showOption)}
-        onBlur={() => setShowOption(false)}
       >
         <div className={"px-4 h-full flex items-center"}>
           {value ? value.label : placeholder}
+        </div>
+        <div
+          className={`duration-500 origin-center flex items-center p-2 ${
+            showOption ? "rotate-0" : "-rotate-180"
+          }`}
+        >
+          {ChevronDown}
         </div>
       </div>
       {showOption ? (
@@ -72,8 +108,8 @@ const Select = ({
                 <div
                   className={`px-4 h-full flex items-center mx-1 rounded ${
                     option.value === value?.value
-                      ? "bg-orange-400 text-white"
-                      : "hover:bg-orange-100 hover:text-orange-400"
+                      ? "bg-jin-blue-400 text-white"
+                      : "hover:bg-jin-blue-100 hover:text-jin-blue-400"
                   }`}
                 >
                   {option.label}

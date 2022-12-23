@@ -108,7 +108,7 @@ const PageNumberButton = ({
 }) => {
   return (
     <button
-      className={`${isFocused ? "text-orange-400" : ""}`}
+      className={`${isFocused ? "text-jin-blue-400" : ""}`}
       onClick={() => onClick(children)}
     >
       {children}
