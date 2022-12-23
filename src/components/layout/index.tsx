@@ -28,7 +28,7 @@ const Header = () => {
   const NavList: NavListTypes[] = [
     { title: "콘서트", href: "/concert" },
     { title: "뮤지컬", href: "/musical" },
-    { title: "티켓 오픈공지", href: "/open/page" },
+    { title: "티켓 오픈공지", href: "/open/page/1" },
   ];
 
   const router = useRouter();
@@ -50,7 +50,7 @@ const Header = () => {
           <SearchForm
             onSubmit={(value) => console.log(value)}
             placeholder={"검색어를 입력해주세요."}
-            className={"border-orange-400"}
+            className={{ form: "border-orange-400" }}
           />
         </section>
         <nav className={"h-8 border-t px-8"}>

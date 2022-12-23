@@ -1,11 +1,11 @@
 import React from "react";
 
-export interface TagProps {
+export interface FlagProps {
   children: string;
   className?: string;
 }
 
-const Tag = ({ children, className = "" }: TagProps) => {
+const Flag = ({ children, className = "" }: FlagProps) => {
   return (
     <div
       className={`w-fit px-1 m-0 text-xs bg-orange-400 text-white tracking-tight my-0.5 ${className}`}
@@ -15,4 +15,4 @@ const Tag = ({ children, className = "" }: TagProps) => {
   );
 };
 
-export default Tag;
+export default Flag;

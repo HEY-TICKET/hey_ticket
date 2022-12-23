@@ -1,26 +1,52 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import Pagination from "../../../components/Pagination";
-import Tag from "../../../components/Tag";
 import { useRouter } from "next/router";
+import Select, { SelectOption } from "../../../components/Select";
+import SearchForm from "../../../components/SearchForm";
+import OpenNoticeListItem, {
+  OpenNoticeListItemProps,
+} from "../../../components/OpenNoticeListItem";
+import CategoryList, {
+  OptionItemProps,
+} from "../../../components/CategoryList";
 
 interface NoticeProps {}
+
+const options = [
+  { value: "all", label: "전체" },
+  { value: "concert", label: "콘서트" },
+  { value: "musical", label: "뮤지컬" },
+];
+const categoryList = [
+  { value: 1, label: "등록순" },
+  { value: 2, label: "조회순" },
+  { value: 3, label: "오픈일순" },
+];
 
 const OpenNotice = ({
   OpenNoticeList,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const router = useRouter();
-
   const [activePage, setActivePage] = useState(1);
+  const [selectedOption, setSelectedOption] = useState<SelectOption>(
+    options[0]
+  );
+  const [selectedCategoryOption, setSelectedCategoryOption] =
+    useState<OptionItemProps>(categoryList[0]);
 
-  const handlePaginationChange = useCallback((page: number) => {
+  const handleSelectChange = (value: any) => {
+    if (value) {
+      setSelectedOption(value);
+    }
+  };
+
+  const handlePaginationChange = useCallback(async (page: number) => {
     setActivePage(page);
-    console.log(
-      router.push({
-        pathname: router.pathname,
-        query: { page_index: page },
-      })
-    );
+    await router.push({
+      pathname: router.pathname,
+      query: { page_index: page },
+    });
   }, []);
 
   useEffect(() => {
@@ -37,19 +63,30 @@ const OpenNotice = ({
 
   return (
     <div className={""}>
-      <section>What's hot</section>
       <section>
-        <div className={"border-b"}>
-          <section>
-            <div>select box</div>
-            <input type="text" />
-            <button>검색</button>
+        <div className={"border-b flex items-center justify-between h-16 mx-4"}>
+          <section className={"flex items-center h-8 text-sm"}>
+            <div className={"w-36"}>
+              <Select
+                options={options}
+                value={selectedOption}
+                onChange={handleSelectChange}
+              />
+            </div>
+            <SearchForm
+              className={{
+                form: `h-8 rounded px-4 min-w-[150px] w-[225px]`,
+                input: "w-[100px]",
+              }}
+              onSubmit={(value) => console.log(value)}
+              iconSize={"sm"}
+            />
           </section>
-          <section>
-            <button>등록순</button>
-            <button>조회순</button>
-            <button>오픈일 순</button>
-          </section>
+          <CategoryList
+            list={categoryList}
+            value={selectedCategoryOption}
+            onChange={(item) => setSelectedCategoryOption(item)}
+          />
         </div>
         <ul>
           <li>
@@ -71,18 +108,13 @@ const OpenNotice = ({
 export const getStaticPaths = async () => {
   // todo : 이곳에서 현재 page_index 에 관한 정보를 불러와서 getStaticProps 에 전달한다.
   return {
-    paths: [
-      { params: { page_index: "1" } },
-      { params: { page_index: "2" } },
-      { params: { page_index: "3" } },
-      { params: { page_index: "4" } },
-    ],
+    paths: [{ params: { page_index: "1" } }],
     fallback: true,
   };
 };
 
 export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
-  console.log(params);
+  // console.log(params);
   const exampleList: OpenNoticeListItemProps[] = [
     {
       openDate: "2022.12.22 (목) 18:00",
@@ -141,64 +173,3 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
 };
 
 export default OpenNotice;
-
-export interface TagProps {
-  title: string;
-  className?: string;
-}
-
-interface OpenNoticeListItemProps {
-  openDate: string;
-  title: string;
-  registrationDate: string;
-  tags?: TagProps[];
-  hits: number;
-  posterUrl?: string;
-  id: number;
-}
-
-const OpenNoticeListItem = ({
-  openDate,
-  title,
-  registrationDate,
-  tags,
-  hits,
-  posterUrl,
-}: OpenNoticeListItemProps) => {
-  return (
-    <div
-      className={
-        "grid grid-cols-[250px_auto_100px] gap-4 border-b py-3 px-4 h-28 mx-6"
-      }
-    >
-      <section className={"flex flex-col gap-2 justify-center text-sm"}>
-        <span>티켓 오픈일</span>
-        <p>{openDate}</p>
-      </section>
-      <section className={"flex flex-col justify-center gap-2"}>
-        <div>
-          <div className={"flex gap-2"}>
-            {tags?.map((tag, index) => (
-              <Tag key={index} className={tag.className}>
-                {tag.title}
-              </Tag>
-            ))}
-          </div>
-          <span>{title}</span>
-        </div>
-        <div className={"flex gap-6 text-gray-400 text-sm"}>
-          <p>{registrationDate}</p>
-          <div>|</div>
-          <p>조회 {hits}</p>
-        </div>
-      </section>
-      <section>
-        {posterUrl ? (
-          <img src={posterUrl} alt="poster" />
-        ) : (
-          <div className={"w-[65px] h-full bg-gray-200 m-auto"}></div>
-        )}
-      </section>
-    </div>
-  );
-};
