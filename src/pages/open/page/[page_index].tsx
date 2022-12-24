@@ -76,10 +76,11 @@ const OpenNotice = ({
             </div>
             <SearchForm
               className={{
-                form: `h-8 rounded px-4 min-w-[150px] w-[225px]`,
+                form: `h-8 px-4 min-w-[150px] w-[225px] rounded`,
                 input: "w-[100px]",
               }}
               onSubmit={(value) => console.log(value)}
+              placeholder={'검색'}
               iconSize={"sm"}
             />
           </section>

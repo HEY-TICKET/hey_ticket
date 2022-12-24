@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import SearchForm from "../SearchForm";
 import React from "react";
-import CategoryList from "../CategoryList";
+import CategoryList, { OptionItemProps } from "../CategoryList";
 
 interface NavListTypes {
   title: string;
@@ -38,7 +38,7 @@ const Header = () => {
           <SearchForm
             onSubmit={(value) => console.log(value)}
             placeholder={"검색어를 입력해주세요."}
-            className={{ form: "border-jin-blue-400" }}
+            className={{ form: "border-jin-blue-400 rounded-2xl px-6" }}
           />
         </section>
         <nav className={"h-8 border-t px-8"}>
@@ -68,10 +68,16 @@ const Header = () => {
 export default Header;
 
 const TopHeader = () => {
+  const router = useRouter();
   const categoryList = [
-    { value: "signIn", label: "로그인" },
-    { value: "signUp", label: "회원가입" },
+    { value: "/signIn", label: "로그인" },
+    { value: "/signUp", label: "회원가입" },
   ];
+
+  const handleChange = async (category: OptionItemProps) => {
+    console.log(category);
+    await router.push({ pathname: category.value as string });
+  };
 
   return (
     <header className={"col-span-full grid grid-cols-6 border-b"}>
@@ -80,7 +86,7 @@ const TopHeader = () => {
       >
         <CategoryList
           list={categoryList}
-          onChange={(value) => alert(JSON.stringify(value))}
+          onChange={handleChange}
           className={"font-bold text-xs mx-4 text-gray-500"}
         />
       </section>

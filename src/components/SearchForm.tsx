@@ -53,11 +53,11 @@ const SearchForm = ({
 
   const [isFocused, setIsFocused] = useState(false);
 
+
   return (
     <form
-      className={`flex items-center rounded-2xl border w-1/2 min-w-[300px] mx-2 px-6 py-1.5 ${
-        isFocused ? "border-jin-blue-400" : ""
-      } ${className?.form}`}
+      className={`flex items-center border w-1/2 min-w-[300px] mx-2 px-4 py-1.5
+        ${isFocused ? "border-jin-blue-400" : ""} ${className?.form}`}
       onSubmit={(e) => {
         e.preventDefault();
         onSubmit(value);

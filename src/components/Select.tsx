@@ -76,7 +76,7 @@ const Select = ({
       <div
         className={`flex justify-between w-full h-8 rounded cursor-pointer transition duration-100 ease-linear ${
           showOption
-            ? "outline outline-2 outline-jin-blue-200 border border-jin-blue-400 "
+            ? "outline outline-jin-blue-200 border border-jin-blue-400 "
             : "border hover:border-gray-400"
         }`}
         onClick={() => setShowOption(!showOption)}

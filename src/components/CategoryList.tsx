@@ -30,13 +30,14 @@ const CategoryList = ({
                 isCurrentValue
                   ? "text-jin-blue-400 font-bold"
                   : "hover:text-jin-blue-400"
-              }`}
+              }
+              `}
               onClick={() => onChange(item)}
             >
               {item.label}
             </button>
             {isNotLast ? (
-              <div className={"font-medium text-gray-300"}>|</div>
+              <div className={"font-light text-gray-300 h-fit "}>|</div>
             ) : (
               <></>
             )}
